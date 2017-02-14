@@ -1,0 +1,44 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.3.0-beta4'
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        jcenter()
+    }
+}
+
+ext {
+    supportLibraryVersion = '25.1.1'
+    daggerVersion = '2.9'
+    rxJavaVersion = '2.0.5'
+    rxRelayVersion = '2.0.0'
+    butterknifeVersion = '8.4.0'
+    conductorVersion = '2.1.0'
+    scoperVersion = '0.8.0'
+}
+
+ext.deps = [
+        rxjava             : "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
+        rxrelay            : "com.jakewharton.rxrelay2:rxrelay:${rxRelayVersion}",
+        dagger             : "com.google.dagger:dagger:${daggerVersion}",
+        daggerCompiler     : "com.google.dagger:dagger-compiler:${daggerVersion}",
+        butterknife        : "com.jakewharton:butterknife:${butterknifeVersion}",
+        butterknifeCompiler: "com.jakewharton:butterknife-compiler:${butterknifeVersion}",
+        conductor          : "com.bluelinelabs:conductor:${conductorVersion}",
+        scoper             : "com.brandongogetap:scoper:${scoperVersion}"
+]
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
