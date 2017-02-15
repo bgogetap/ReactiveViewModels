@@ -32,8 +32,8 @@ public final class ItemViewHolder extends RecyclerView.ViewHolder {
 
     void bind(ListItem item) {
         this.item = item;
-        colorView.setBackgroundColor(item.color);
-        titleTextView.setText(item.title);
-        messageTextView.setText(item.message);
+        colorView.setBackgroundColor(item.color());
+        titleTextView.setText(item.title());
+        messageTextView.setText(item.message());
     }
 }

@@ -17,10 +17,10 @@ final class DetailViewModel implements DetailViewProvider {
         colorRelay = BehaviorRelay.create();
         idRelay = BehaviorRelay.create();
         repository.getItem().subscribe(listItem -> {
-            titleRelay.accept(listItem.title);
-            messageRelay.accept(listItem.message);
-            colorRelay.accept(listItem.color);
-            idRelay.accept(listItem.id);
+            titleRelay.accept(listItem.title());
+            messageRelay.accept(listItem.message());
+            colorRelay.accept(listItem.color());
+            idRelay.accept(listItem.id());
         });
     }
 

@@ -19,7 +19,7 @@ public final class DetailModule {
         return new DetailRepository(database, itemId);
     }
 
-    @Provides @ScreenScope DetailViewModel provideViewModel(DetailRepository repository) {
+    @Provides @ScreenScope static DetailViewModel provideViewModel(DetailRepository repository) {
         return new DetailViewModel(repository);
     }
 

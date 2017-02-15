@@ -26,6 +26,7 @@ ext {
     butterknifeVersion = '8.4.0'
     conductorVersion = '2.1.0'
     scoperVersion = '0.8.0'
+    autoValueVersion = '1.2'
 }
 
 ext.deps = [
@@ -36,7 +37,8 @@ ext.deps = [
         butterknife        : "com.jakewharton:butterknife:${butterknifeVersion}",
         butterknifeCompiler: "com.jakewharton:butterknife-compiler:${butterknifeVersion}",
         conductor          : "com.bluelinelabs:conductor:${conductorVersion}",
-        scoper             : "com.brandongogetap:scoper:${scoperVersion}"
+        scoper             : "com.brandongogetap:scoper:${scoperVersion}",
+        autoValue          : "com.google.auto.value:auto-value:1.2",
 ]
 
 task clean(type: Delete) {

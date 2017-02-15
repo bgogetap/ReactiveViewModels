@@ -27,7 +27,7 @@ public final class ItemDatabase {
             String title = String.format("Item #%d", i);
             String message = String.format("This is the %d item", i);
             int color = COLORS[i % 5];
-            items.add(new ListItem(i, title, message, color));
+            items.add(ListItem.create(i, title, message, color));
         }
         return items;
     }
@@ -38,7 +38,7 @@ public final class ItemDatabase {
 
     public Observable<ListItem> itemForId(int id) {
         for (ListItem item : items) {
-            if (item.id == id) {
+            if (item.id() == id) {
                 return Observable.just(item);
             }
         }

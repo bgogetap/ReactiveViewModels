@@ -1,16 +1,19 @@
 package com.brandongogetap.reactiveviewmodels.database;
 
-public final class ListItem {
+import com.google.auto.value.AutoValue;
 
-    public final int id;
-    public final String title;
-    public final String message;
-    public final int color;
+@AutoValue
+public abstract class ListItem {
 
-    ListItem(int id, String title, String message, int color) {
-        this.id = id;
-        this.title = title;
-        this.message = message;
-        this.color = color;
+    public static ListItem create(int id, String title, String message, int color) {
+        return new AutoValue_ListItem(id, title, message, color);
     }
+
+    public abstract int id();
+
+    public abstract String title();
+
+    public abstract String message();
+
+    public abstract int color();
 }
