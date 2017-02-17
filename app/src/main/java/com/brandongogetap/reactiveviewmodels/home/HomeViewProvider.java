@@ -9,4 +9,6 @@ import io.reactivex.Observable;
 interface HomeViewProvider {
 
     Observable<List<ListItem>> listItems();
+
+    void release();
 }

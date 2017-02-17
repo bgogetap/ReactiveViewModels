@@ -4,6 +4,7 @@ import com.bluelinelabs.conductor.Router;
 import com.bluelinelabs.conductor.changehandler.FadeChangeHandler;
 import com.brandongogetap.reactiveviewmodels.base.RouterService;
 import com.brandongogetap.reactiveviewmodels.dagger.ScreenScope;
+import com.brandongogetap.reactiveviewmodels.database.ItemDatabase;
 import com.brandongogetap.reactiveviewmodels.database.ListItem;
 import com.brandongogetap.reactiveviewmodels.detail.DetailController;
 
@@ -15,9 +16,14 @@ import static com.bluelinelabs.conductor.RouterTransaction.with;
 final class HomePresenter implements ItemClickedListener {
 
     private final RouterService routerService;
+    private final ItemDatabase database;
 
-    @Inject HomePresenter(RouterService routerService) {
+    @Inject HomePresenter(
+            RouterService routerService,
+            ItemDatabase database
+    ) {
         this.routerService = routerService;
+        this.database = database;
     }
 
     @Override public void itemClicked(ListItem listItem) {
@@ -27,5 +33,13 @@ final class HomePresenter implements ItemClickedListener {
                     .pushChangeHandler(new FadeChangeHandler())
                     .popChangeHandler(new FadeChangeHandler()));
         }
+    }
+
+    @Override public void itemLongClicked(ListItem listItem) {
+        database.removeItem(listItem);
+    }
+
+    void addItemClicked() {
+        database.addItem();
     }
 }

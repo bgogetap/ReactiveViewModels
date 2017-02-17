@@ -17,6 +17,7 @@ final class HomeAdapter extends RecyclerView.Adapter<ItemViewHolder> {
 
     HomeAdapter(@NonNull List<ListItem> data) {
         this.data = data;
+        setHasStableIds(true);
     }
 
     @Override public ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -26,6 +27,10 @@ final class HomeAdapter extends RecyclerView.Adapter<ItemViewHolder> {
 
     @Override public void onBindViewHolder(ItemViewHolder holder, int position) {
         holder.bind(data.get(position));
+    }
+
+    @Override public long getItemId(int position) {
+        return data.get(position).id();
     }
 
     @Override public int getItemCount() {

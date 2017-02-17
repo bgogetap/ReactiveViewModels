@@ -28,6 +28,10 @@ public final class ItemViewHolder extends RecyclerView.ViewHolder {
         ButterKnife.bind(this, itemView);
         Scoper.<HomeComponent>getComponent(itemView.getContext()).inject(this);
         itemView.setOnClickListener(v -> listener.itemClicked(item));
+        itemView.setOnLongClickListener(v -> {
+            listener.itemLongClicked(item);
+            return true;
+        });
     }
 
     void bind(ListItem item) {

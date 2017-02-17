@@ -19,11 +19,13 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import io.reactivex.disposables.CompositeDisposable;
 
 public final class HomeController extends BaseController<HomeComponent> {
 
     @Inject HomeViewProvider viewModel;
+    @Inject HomePresenter presenter;
 
     @BindView(R.id.recycler_view) RecyclerView recyclerView;
 
@@ -35,11 +37,21 @@ public final class HomeController extends BaseController<HomeComponent> {
         component.inject(this);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         disposables.add(viewModel.listItems().subscribe(this::setData));
+        setRetainViewMode(RetainViewMode.RETAIN_DETACH);
     }
 
     private void setData(List<ListItem> items) {
-        adapter = new HomeAdapter(items);
-        recyclerView.setAdapter(adapter);
+        if (adapter == null) {
+            adapter = new HomeAdapter(items);
+            recyclerView.setAdapter(adapter);
+        } else {
+            // DiffUtil example coming soon -- don't really do this
+            adapter.notifyDataSetChanged();
+        }
+    }
+
+    @OnClick(R.id.fab) void addClicked() {
+        presenter.addItemClicked();
     }
 
     @Override protected View inflateView(LayoutInflater inflater, ViewGroup container) {
@@ -54,5 +66,11 @@ public final class HomeController extends BaseController<HomeComponent> {
     @Override protected void onDestroyView(@NonNull View view) {
         super.onDestroyView(view);
         disposables.clear();
+        adapter = null;
+    }
+
+    @Override protected void onDestroy() {
+        super.onDestroy();
+        viewModel.release();
     }
 }
